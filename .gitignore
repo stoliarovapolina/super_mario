@@ -9,3 +9,5 @@
 
 build_ninja/
 build/
+build_macos/
+build_test/
