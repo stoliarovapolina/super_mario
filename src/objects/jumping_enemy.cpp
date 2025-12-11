@@ -61,11 +61,6 @@ void JumpingEnemy::move_vertically() noexcept {
 		jump_counter = 0;
 	}
 	
-	// Применение гравитации
-	if (vspeed < MAX_V_SPEED) {
-		vspeed += V_ACCELERATION;
-	}
-	
-	// Движение вертикально
+	// Движение вертикально (включая применение гравитации в базовом классе)
 	Movable::move_vertically();
 }

@@ -13,8 +13,10 @@ namespace biv {
 	 */
 	class JumpingEnemy : public RectMapMovableAdapter, public Movable, public Collisionable {
 		private:
+			static constexpr int DEFAULT_JUMP_INTERVAL = 50;  // Интервал между прыжками (в тиках)
+			
 			int jump_counter = 0;      // Счетчик для определения времени прыжка
-			int jump_interval = 50;    // Интервал между прыжками (в тиках)
+			int jump_interval = DEFAULT_JUMP_INTERVAL;
 			
 		public:
 			JumpingEnemy(const Coord& top_left, const int width, const int height);

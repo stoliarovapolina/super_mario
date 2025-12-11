@@ -13,9 +13,12 @@ namespace biv {
 	 */
 	class FlyingEnemy : public RectMapMovableAdapter, public Movable, public Collisionable {
 		private:
+			static constexpr float DEFAULT_FLY_RANGE = 10.0f;      // Диапазон полета вверх/вниз
+			static constexpr float DEFAULT_VERTICAL_SPEED = 0.15f;  // Скорость вертикального движения
+			
 			float initial_y;           // Начальная позиция по Y
-			float fly_range = 10.0f;   // Диапазон полета вверх/вниз
-			float vertical_speed = 0.15f;  // Скорость вертикального движения
+			float fly_range = DEFAULT_FLY_RANGE;
+			float vertical_speed = DEFAULT_VERTICAL_SPEED;
 			
 		public:
 			FlyingEnemy(const Coord& top_left, const int width, const int height);

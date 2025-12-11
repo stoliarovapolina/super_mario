@@ -38,14 +38,12 @@ void FlyingEnemy::process_vertical_static_collision(Rect* obj) noexcept {
 
 void FlyingEnemy::move_vertically() noexcept {
 	// Логика вертикального движения - летание вверх и вниз
-	top_left.y += vspeed;
 	
-	// Проверка границ полета
-	if (top_left.y > initial_y + fly_range) {
-		top_left.y = initial_y + fly_range;
-		vspeed = -vertical_speed;
-	} else if (top_left.y < initial_y - fly_range) {
-		top_left.y = initial_y - fly_range;
-		vspeed = vertical_speed;
+	// Проверка границ полета перед движением
+	if ((top_left.y >= initial_y + fly_range && vspeed > 0) ||
+	    (top_left.y <= initial_y - fly_range && vspeed < 0)) {
+		vspeed = -vspeed;
 	}
+	
+	top_left.y += vspeed;
 }
