@@ -3,10 +3,7 @@
 #include "game_level.hpp"
 
 namespace biv {
-	/**
-	 * Третий уровень игры - финальный уровень с максимальной сложностью.
-	 * Включает новые типы врагов: летающих и прыгающих.
-	 */
+
 	class ThirdLevel : public GameLevel {
 		public:
 			ThirdLevel(UIFactory* ui_factory);

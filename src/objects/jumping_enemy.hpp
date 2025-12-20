@@ -1,33 +1,21 @@
 #pragma once
 
-#include "collisionable.hpp"
-#include "movable.hpp"
-#include "rect.hpp"
-#include "rect_map_movable_adapter.hpp"
-#include "speed.hpp"
+#include "enemy.hpp"
 
 namespace biv {
-	/**
-	 * Прыгающий враг - враг, который ходит по земле и периодически прыгает.
-	 * Использует механику гравитации и прыжков.
-	 */
-	class JumpingEnemy : public RectMapMovableAdapter, public Movable, public Collisionable {
+	class JumpingEnemy : public Enemy {
 		private:
-			static constexpr int DEFAULT_JUMP_INTERVAL = 50;  // Интервал между прыжками (в тиках)
-			
-			int jump_counter = 0;      // Счетчик для определения времени прыжка
-			int jump_interval = DEFAULT_JUMP_INTERVAL;
-			
+			float jump_hspeed = 0.25f; // горизонтальная скорость во время прыжка
+			int jump_cooldown = 0;
+			static constexpr int JUMP_COOLDOWN_TICKS = 25;
+
 		public:
 			JumpingEnemy(const Coord& top_left, const int width, const int height);
 
-			Rect get_rect() const noexcept override;
-			Speed get_speed() const noexcept override;
+			void process_vertical_static_collision(Rect* platform) noexcept override;
 
-			void process_horizontal_static_collision(Rect*) noexcept override;
-			void process_mario_collision(Collisionable*) noexcept override;
-			void process_vertical_static_collision(Rect*) noexcept override;
-			
-			void move_vertically() noexcept override;
+		private:
+			float predict_jump_dx() const noexcept;
+			bool will_land_on_platform(Rect* platform, float dx) const noexcept;
 	};
 }

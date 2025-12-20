@@ -18,11 +18,12 @@ void ConsoleUIFactory::clear_data() {
 	flying_enemies.clear();
 	jumping_enemies.clear();
 	moneys.clear();
+
+	
+	finishes.clear();
 }
 
-void ConsoleUIFactory::create_box(
-	const Coord& top_left, const int width, const int height
-) {
+void ConsoleUIFactory::create_box(const Coord& top_left, const int width, const int height) {
 	ConsoleBox* box = new ConsoleBox(top_left, width, height);
 	boxes.push_back(box);
 	game->add_map_movable(box);
@@ -30,9 +31,7 @@ void ConsoleUIFactory::create_box(
 	game_map->add_obj(box);
 }
 
-void ConsoleUIFactory::create_enemy(
-	const Coord& top_left, const int width, const int height
-) {
+void ConsoleUIFactory::create_enemy(const Coord& top_left, const int width, const int height) {
 	ConsoleEnemy* enemy = new ConsoleEnemy(top_left, width, height);
 	enemies.push_back(enemy);
 	game->add_map_movable(enemy);
@@ -41,9 +40,7 @@ void ConsoleUIFactory::create_enemy(
 	game_map->add_obj(enemy);
 }
 
-void ConsoleUIFactory::create_flying_enemy(
-	const Coord& top_left, const int width, const int height
-) {
+void ConsoleUIFactory::create_flying_enemy(const Coord& top_left, const int width, const int height) {
 	ConsoleFlyingEnemy* flying_enemy = new ConsoleFlyingEnemy(top_left, width, height);
 	flying_enemies.push_back(flying_enemy);
 	game->add_map_movable(flying_enemy);
@@ -52,9 +49,7 @@ void ConsoleUIFactory::create_flying_enemy(
 	game_map->add_obj(flying_enemy);
 }
 
-void ConsoleUIFactory::create_jumping_enemy(
-	const Coord& top_left, const int width, const int height
-) {
+void ConsoleUIFactory::create_jumping_enemy(const Coord& top_left, const int width, const int height) {
 	ConsoleJumpingEnemy* jumping_enemy = new ConsoleJumpingEnemy(top_left, width, height);
 	jumping_enemies.push_back(jumping_enemy);
 	game->add_map_movable(jumping_enemy);
@@ -63,9 +58,7 @@ void ConsoleUIFactory::create_jumping_enemy(
 	game_map->add_obj(jumping_enemy);
 }
 
-void ConsoleUIFactory::create_full_box(
-	const Coord& top_left, const int width, const int height
-) {
+void ConsoleUIFactory::create_full_box(const Coord& top_left, const int width, const int height) {
 	ConsoleFullBox* full_box = new ConsoleFullBox(top_left, width, height, this);
 	full_boxes.push_back(full_box);
 	game->add_collisionable(full_box);
@@ -74,16 +67,25 @@ void ConsoleUIFactory::create_full_box(
 	game_map->add_obj(full_box);
 }
 
-void ConsoleUIFactory::create_mario(
-	const Coord& top_left, const int width, const int height
-) {
+void ConsoleUIFactory::create_finish(const Coord& top_left, const int width, const int height) {
+	ConsoleFinish* finish = new ConsoleFinish(top_left, width, height);
+	finishes.push_back(finish);
+
+	game->add_map_movable(finish);  
+	game->add_static_obj(finish);   
+	game->set_finish(finish);       
+
+	game_map->add_obj(finish);
+}
+
+void ConsoleUIFactory::create_mario(const Coord& top_left, const int width, const int height) {
 	game->remove_collisionable(mario);
 	game->remove_movable(mario);
 	game->remove_mario();
 	game_map->remove_obj(mario);
 	delete mario;
 	mario = nullptr;
-	
+
 	mario = new ConsoleMario(top_left, width, height);
 	game->add_collisionable(mario);
 	game->add_movable(mario);
@@ -91,9 +93,7 @@ void ConsoleUIFactory::create_mario(
 	game_map->add_obj(mario);
 }
 
-void ConsoleUIFactory::create_money(
-	const Coord& top_left, const int width, const int height
-) {
+void ConsoleUIFactory::create_money(const Coord& top_left, const int width, const int height) {
 	ConsoleMoney* money = new ConsoleMoney(top_left, width, height);
 	moneys.push_back(money);
 	game->add_map_movable(money);
@@ -102,9 +102,7 @@ void ConsoleUIFactory::create_money(
 	game_map->add_obj(money);
 }
 
-void ConsoleUIFactory::create_ship(
-	const Coord& top_left, const int width, const int height
-) {
+void ConsoleUIFactory::create_ship(const Coord& top_left, const int width, const int height) {
 	ConsoleShip* ship = new ConsoleShip(top_left, width, height);
 	ships.push_back(ship);
 	game->add_map_movable(ship);
@@ -120,9 +118,6 @@ biv::Mario* ConsoleUIFactory::get_mario() {
 	return mario;
 }
 
-// ----------------------------------------------------------------------------
-// 									PRIVATE
-// ----------------------------------------------------------------------------
 void ConsoleUIFactory::create_game_map() {
 	game_map = new ConsoleGameMap(30, 200);
 }

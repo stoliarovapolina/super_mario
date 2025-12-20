@@ -6,5 +6,5 @@ ConsoleFlyingEnemy::ConsoleFlyingEnemy(const Coord& top_left, const int width, c
 	: FlyingEnemy(top_left, width, height) {}
 
 char ConsoleFlyingEnemy::get_brush() const noexcept {
-	return 'F'; // 'F' для Flying enemy
+	return 'F'; 
 }

@@ -21,6 +21,6 @@ tcsetattr(STDIN_FILENO, TCSANOW, &t);
 
 void biv::os::set_cursor_start_position() {
 // Move cursor to home position (0,0) using ANSI escape codes
-std::cout << "\033[H";
+ std::cout << "\033[2J\033[H";
 std::cout.flush();
 }

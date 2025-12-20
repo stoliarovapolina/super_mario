@@ -2,12 +2,12 @@ target_sources(${PROJECT_NAME}
 	PRIVATE
 		console_box.cpp
 		console_enemy.cpp
-		console_flying_enemy.cpp
-		console_jumping_enemy.cpp
 		console_full_box.cpp
 		console_mario.cpp
 		console_money.cpp
 		console_ship.cpp
+		console_jumping_enemy.cpp
+		console_flying_enemy.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
