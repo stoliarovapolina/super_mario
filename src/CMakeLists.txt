@@ -14,3 +14,14 @@ add_subdirectory(levels)
 add_subdirectory(model)
 add_subdirectory(objects)
 add_subdirectory(ui)
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+	"${CMAKE_CURRENT_SOURCE_DIR}"
+	"${CMAKE_CURRENT_SOURCE_DIR}/model"
+	"${CMAKE_CURRENT_SOURCE_DIR}/objects"
+	"${CMAKE_CURRENT_SOURCE_DIR}/controller"
+	"${CMAKE_CURRENT_SOURCE_DIR}/levels"
+	"${CMAKE_CURRENT_SOURCE_DIR}/ui"
+	"${CMAKE_CURRENT_SOURCE_DIR}/ui/console"
+	"${CMAKE_CURRENT_SOURCE_DIR}/ui/console/ui_objects"
+)

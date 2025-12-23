@@ -29,7 +29,6 @@ void ConsoleGameMap::add_obj(ConsoleUIObject* obj) {
 }
 
 void ConsoleGameMap::clear() noexcept {
-	// Воздух
 	for (int i = 0; i < width; i++) {
 		map[0][i] = ' ';
 	}
@@ -39,7 +38,6 @@ void ConsoleGameMap::clear() noexcept {
 		std::sprintf(map[i], map[0]);
 	}
 	
-	// Вода
 	for (int i = 0; i < width; i++) {
 		map[height - 3][i] = '~';
 	}
@@ -80,7 +78,10 @@ void ConsoleGameMap::remove_objs() {
 }
 
 void ConsoleGameMap::show() const noexcept {
-	for (int i = 0; i < height; i++) {
-		std::cout << map[i];
-	}
+    std::cout << "\033[2J\033[1;1H";
+    
+    for (int i = 0; i < height; i++) {
+        std::cout << map[i] << '\n';  
+    }
+	 std::cout.flush();
 }
